@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -28,7 +29,7 @@ export class MoviesController {
   }
 
   @Get(':id')
-  getOne(@Param('id') movieId: number): Movie {
+  getOne(@Param('id', ParseIntPipe) movieId: number): Movie {
     return this.moviesService.getOne(movieId);
   }
 
@@ -38,12 +39,15 @@ export class MoviesController {
   }
 
   @Delete(':id')
-  delete(@Param('id') movieId: number) {
+  delete(@Param('id', ParseIntPipe) movieId: number) {
     return this.moviesService.deleteOne(movieId);
   }
 
   @Patch(':id')
-  patchOne(@Param('id') movieId: number, @Body() updateData: UpdateMovieDto) {
+  patchOne(
+    @Param('id', ParseIntPipe) movieId: number,
+    @Body() updateData: UpdateMovieDto,
+  ) {
     return this.moviesService.update(movieId, updateData);
   }
 }

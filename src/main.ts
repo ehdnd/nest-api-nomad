@@ -8,7 +8,7 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
-      // URL 을 통해 들어오는 데이터는 모두 string
+      // DTO에 따라 자동으로 타입 변환
       transform: true,
     }),
   );
