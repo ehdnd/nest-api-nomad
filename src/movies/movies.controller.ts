@@ -7,7 +7,6 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-  Query,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
@@ -21,11 +20,6 @@ export class MoviesController {
   @Get()
   getAll(): Movie[] {
     return this.moviesService.getAll();
-  }
-
-  @Get('search')
-  search(@Query('year') searchingYear: number) {
-    return `We are searching for a movie made after: ${searchingYear}`;
   }
 
   @Get(':id')
