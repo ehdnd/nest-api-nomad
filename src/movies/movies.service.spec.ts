@@ -37,7 +37,7 @@ describe('MoviesService', () => {
       expect(movie.id).toEqual(1);
     });
 
-    it('should throw 404 error', () => {
+    it('should throw NotFoundException', () => {
       expect(() => service.getOne(999)).toThrow(NotFoundException);
       expect(() => service.getOne(999)).toThrow('Movie with ID 999 not found.');
     });
@@ -58,7 +58,7 @@ describe('MoviesService', () => {
       expect(afterDeleteAllMovies.length).toEqual(allMovies.length - 1);
     });
 
-    it('should throw 404 error', () => {
+    it('should throw NotFoundException', () => {
       expect(() => service.deleteOne(999)).toThrow(NotFoundException);
     });
   });
@@ -76,6 +76,25 @@ describe('MoviesService', () => {
       expect(afterCreateAllMoviesLenth).toBeGreaterThan(
         beforeCreateAllMoviesLengh,
       );
+    });
+  });
+
+  describe('update', () => {
+    it('should update a movie', () => {
+      service.create({
+        title: 'Test Movie',
+        genres: ['test'],
+        year: 2000,
+      });
+
+      service.update(1, { title: 'Updated Test' });
+      const movie = service.getOne(1);
+
+      expect(movie.title).toEqual('Updated Test');
+    });
+
+    it('should throw NotFoundException', () => {
+      expect(() => service.deleteOne(999)).toThrow(NotFoundException);
     });
   });
 });
