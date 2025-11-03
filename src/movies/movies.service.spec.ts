@@ -13,6 +13,10 @@ describe('MoviesService', () => {
     service = module.get<MoviesService>(MoviesService);
   });
 
+  afterAll(() => {
+    // DB 정리같은 작업들 가능
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
